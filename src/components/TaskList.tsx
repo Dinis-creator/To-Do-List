@@ -3,16 +3,17 @@ import { formatDate, taskPriorityClass, taskPriorityLabel } from '../utils';
 
 type TaskListProps = {
   tasks: Task[];
+  emptyMessage?: string;
   onToggle: (task: Task) => void;
   onEdit: (task: Task) => void;
   onDelete: (taskId: string) => void;
 };
 
-export function TaskList({ tasks, onToggle, onEdit, onDelete }: TaskListProps) {
+export function TaskList({ tasks, emptyMessage, onToggle, onEdit, onDelete }: TaskListProps) {
   if (!tasks.length) {
     return (
       <div className="surface-card rounded-3xl border-dashed p-10 text-center theme-text-muted">
-        Nenhuma tarefa encontrada. Crie a primeira para começar a acumular pontos.
+        {emptyMessage ?? 'Nenhuma tarefa encontrada. Crie a primeira para começar a acumular pontos.'}
       </div>
     );
   }

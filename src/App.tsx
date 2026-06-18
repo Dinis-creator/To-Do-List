@@ -128,6 +128,12 @@ export default function App() {
     setTaskFormOpen(true);
   };
 
+  const clearFilters = () => {
+    setSearch('');
+    setSelectedCategory('all');
+    setSelectedPriority('all');
+  };
+
   const handleExportState = () => {
     const payload = JSON.stringify(storedState, null, 2);
     const blob = new Blob([payload], { type: 'application/json' });
@@ -170,7 +176,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 lg:px-8">
+      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 pb-10 lg:px-8">
         <header className="panel rounded-[2rem] p-6">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -254,6 +260,15 @@ export default function App() {
                   </select>
                 </label>
               </div>
+
+              {(search || selectedCategory !== 'all' || selectedPriority !== 'all') && (
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white/10 px-4 py-3 text-sm">
+                  <span className="theme-text-muted">Filtros ativos. Limpe para ver todas as tarefas.</span>
+                  <button type="button" onClick={clearFilters} className="theme-button theme-button-secondary px-4 py-2 text-sm">
+                    Limpar filtros
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className="panel-soft rounded-3xl p-6">
@@ -269,6 +284,7 @@ export default function App() {
               <div className="mt-6">
                 <TaskList
                   tasks={filteredTasks}
+                  emptyMessage="Nenhuma tarefa corresponde aos filtros atuais. Limpa os filtros para voltar a ver tudo."
                   onToggle={handleToggleTask}
                   onEdit={handleEditTask}
                   onDelete={handleDeleteTask}
@@ -334,6 +350,13 @@ export default function App() {
             </section>
           </aside>
         </main>
+
+        <footer className="mt-6 rounded-[2rem] border border-white/10 bg-white/5 px-6 py-4 text-sm backdrop-blur-xl">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <p className="theme-text">Feito por: Dinis da Silva Gonçalves</p>
+            <p className="theme-text-muted">React · Tailwind CSS · Local Storage · Dark mode · Charts</p>
+          </div>
+        </footer>
       </div>
 
       <TaskForm
