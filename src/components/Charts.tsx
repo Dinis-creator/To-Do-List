@@ -37,13 +37,13 @@ export function Charts({ completed, pending, byPriority }: ChartsProps) {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+      <section className="panel-soft rounded-3xl p-6">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm text-slate-400">Progresso geral</p>
-            <h3 className="text-xl font-semibold text-white">Distribuição de tarefas</h3>
+            <p className="text-sm theme-text-muted">Progresso geral</p>
+            <h3 className="text-xl font-semibold theme-title">Distribuição de tarefas</h3>
           </div>
-          <div className="rounded-full bg-white/5 px-4 py-2 text-sm text-slate-300">
+          <div className="rounded-full bg-white/10 px-4 py-2 text-sm theme-text">
             {completed} concluídas · {pending} pendentes
           </div>
         </div>
@@ -53,20 +53,20 @@ export function Charts({ completed, pending, byPriority }: ChartsProps) {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+      <section className="panel-soft rounded-3xl p-6">
         <div>
-          <p className="text-sm text-slate-400">Prioridades</p>
-          <h3 className="text-xl font-semibold text-white">Volume por nível</h3>
+          <p className="text-sm theme-text-muted">Prioridades</p>
+          <h3 className="text-xl font-semibold theme-title">Volume por nível</h3>
         </div>
 
         <div className="mt-6 space-y-4">
           {byPriority.map((item) => (
             <div key={item.label} className="space-y-2">
-              <div className="flex items-center justify-between text-sm text-slate-300">
+              <div className="flex items-center justify-between text-sm theme-text">
                 <span>{item.label}</span>
                 <span>{item.value}</span>
               </div>
-              <div className="h-3 rounded-full bg-white/5">
+              <div className="h-3 rounded-full bg-white/10">
                 <div
                   className="h-3 rounded-full transition-all"
                   style={{ width: `${(item.value / max) * 100}%`, backgroundColor: item.color }}
